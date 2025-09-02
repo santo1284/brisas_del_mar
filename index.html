@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Brisas Del Mar - Comodidad y Cercanía en Garzón, Huila</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #1a1a1a;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #4f9cf9, #34d399);
+            border-radius: 4px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(15, 23, 42, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23059669" fill-opacity="0.1" d="M0,32L48,80C96,128,192,224,288,224C384,224,480,128,576,90.7C672,53,768,75,864,96C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+            50% { transform: translate(10%, 10%) rotate(180deg); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #4f9cf9, #34d399, #fbbf24);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(79, 156, 249, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #059669, #34d399);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(52, 211, 153, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(52, 211, 153, 0.5);
+            background: linear-gradient(45deg, #34d399, #059669);
+        }
+
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .icon {
+            position: absolute;
+            color: rgba(52, 211, 153, 0.3);
+            animation: floatRandom 8s infinite;
+        }
+
+        @keyframes floatRandom {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4f9cf9, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(45deg, #4f9cf9, #34d399);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #34d399;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #4f9cf9, #34d399);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(52, 211, 153, 0.5);
+            box-shadow: 0 20px 50px rgba(52, 211, 153, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4f9cf9, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #34d399;
+        }
+
+        /* Rooms Section */
+        .rooms-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .room-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(52, 211, 153, 0.3);
+        }
+
+        .room-image {
+            height: 200px;
+            background: linear-gradient(45deg, #4f9cf9, #34d399, #fbbf24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .room-card:hover .room-image::before {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .room-content {
+            padding: 30px;
+            color: white;
+        }
+
+        .room-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #34d399;
+        }
+
+        .room-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .room-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .room-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #34d399;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fbbf24;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .about-text {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text h3 {
+            color: #34d399;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .features-list li::before {
+            content: '🌊';
+            position: absolute;
+            left: 0;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .features-list li:hover {
+            color: #34d399;
+            transform: translateX(10px);
+        }
+
+        .about-visual {
+            background: linear-gradient(135deg, rgba(79, 156, 249, 0.2), rgba(52, 211, 153, 0.2));
+            border-radius: 30px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: rgba(52, 211, 153, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(79, 156, 249, 0.3), transparent),
+                        radial-gradient(circle at 70% 70%, rgba(52, 211, 153, 0.3), transparent);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Location Section */
+        .location {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+            padding: 100px 20px;
+        }
+
+        .location-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .location-info {
+            color: white;
+        }
+
+        .location-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #4f9cf9, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .location-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .location-feature {
+            background: rgba(52, 211, 153, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .location-feature:hover {
+            background: rgba(52, 211, 153, 0.2);
+            transform: scale(1.05);
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #34d399;
+            font-size: 2rem;
+            border: 2px solid rgba(52, 211, 153, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: ping 2s ease-in-out infinite;
+            box-shadow: 0 0 20px #ef4444;
+        }
+
+        @keyframes ping {
+            0% { transform: scale(1); opacity: 1; }
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 50px 40px;
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .form-group label {
+            color: #34d399;
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(52, 211, 153, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #34d399;
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-item {
+            background: linear-gradient(145deg, rgba(79, 156, 249, 0.1), rgba(52, 211, 153, 0.1));
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(52, 211, 153, 0.6);
+        }
+
+        .contact-item-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            color: #34d399;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            padding: 60px 20px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #34d399;
+        }
+
+        /* Animations and Effects */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-content,
+            .location-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .location-features {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: all 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(52, 211, 153, 0.3);
+            border-top: 4px solid #34d399;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="logo">🌊 Brisas Del Mar</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#habitaciones">Habitaciones</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="floating-icons">
+            <div class="icon" style="top: 10%; left: 10%; animation-delay: 0s;">🏨</div>
+            <div class="icon" style="top: 20%; right: 15%; animation-delay: 1s;">✈️</div>
+            <div class="icon" style="bottom: 20%; left: 20%; animation-delay: 2s;">🚗</div>
+            <div class="icon" style="bottom: 30%; right: 10%; animation-delay: 3s;">🌊</div>
+            <div class="icon" style="top: 50%; left: 5%; animation-delay: 4s;">📱</div>
+            <div class="icon" style="top: 60%; right: 5%; animation-delay: 5s;">🛏️</div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Brisas Del Mar</h1>
+            <p>Comodidad y cercanía en el corazón de Garzón, Huila. Tu refugio perfecto cerca del terminal.</p>
+            <a href="#contacto" class="cta-button">Reserva Ahora</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="servicios">
+        <h2 class="section-title fade-in">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card scale-in">
+                <div class="service-icon">🛏️</div>
+                <h3>Habitaciones Cómodas</h3>
+                <p>Habitaciones estándar y familiares equipadas con todo lo necesario para tu descanso: ventilador, TV y baño privado.</p>
+            </div>
+            
+            <div class="service-card scale-in">
+                <div class="service-icon">📶</div>
+                <h3>Wi-Fi Gratuito</h3>
+                <p>Internet gratuito en todo el hotel para mantenerte conectado durante tu estancia.</p>
+            </div>
+            
+            <div class="service-card scale-in">
+                <div class="service-icon">🚗</div>
+                <h3>Estacionamiento Privado</h3>
+                <p>Espacio seguro y gratuito para tu vehículo, con vigilancia las 24 horas.</p>
+            </div>
+            
+            <div class="service-card scale-in">
+                <div class="service-icon">🏪</div>
+                <h3>Tienda 24/7</h3>
+                <p>Productos esenciales, snacks, bebidas y artículos de higiene disponibles las 24 horas.</p>
+            </div>
+            
+            <div class="service-card scale-in">
+                <div class="service-icon">🍳</div>
+                <h3>Desayuno Económico</h3>
+                <p>Servicio de desayuno variado y económico para comenzar bien el día.</p>
+            </div>
+            
+            <div class="service-card scale-in">
+                <div class="service-icon">🚐</div>
+                <h3>Transporte</h3>
+                <p>Traslados al aeropuerto y terminal para facilitar tu llegada y salida.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="section" id="habitaciones">
+        <h2 class="section-title fade-in">Nuestras Habitaciones</h2>
+        <div class="rooms-container">
+            <div class="room-card fade-in">
+                <div class="room-image">🛏️</div>
+                <div class="room-content">
+                    <h3 class="room-title">Habitación Estándar</h3>
+                    <p>Perfecta para viajeros individuales o parejas que buscan comodidad y economía.</p>
+                    <ul class="room-features">
+                        <li>Ventilador</li>
+                        <li>Televisor</li>
+                        <li>Baño privado</li>
+                        <li>Wi-Fi gratuito</li>
+                    </ul>
+                    <div class="price">Desde $45.000/noche</div>
+                </div>
+            </div>
+            
+            <div class="room-card fade-in">
+                <div class="room-image">👨‍👩‍👧‍👦</div>
+                <div class="room-content">
+                    <h3 class="room-title">Habitación Familiar</h3>
+                    <p>Ideal para familias o grupos, con espacio adicional y comodidades extras.</p>
+                    <ul class="room-features">
+                        <li>Dos camas</li>
+                        <li>Colchoneta adicional</li>
+                        <li>Ventilador y TV</li>
+                        <li>Baño privado</li>
+                        <li>Mayor espacio</li>
+                    </ul>
+                    <div class="price">Desde $65.000/noche</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="sobre-nosotros">
+        <h2 class="section-title fade-in">Sobre Nosotros</h2>
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h3>Tu Refugio Cerca del Terminal</h3>
+                <p>En Hotel Brisas Del Mar entendemos que después de un viaje largo, solo quieres llegar a un lugar cómodo donde puedas descansar sin preocupaciones. Por eso hemos creado un espacio acogedor y tranquilo, estratégicamente ubicado cerca del terminal de Garzón.</p>
+                
+                <p>Nos especializamos en ofrecer una excelente relación calidad-precio, brindando servicios esenciales sin comprometer la comodidad. Nuestro compromiso es hacer que tu estancia sea sencilla, relajante y memorable.</p>
+                
+                <ul class="features-list">
+                    <li>Atención personalizada las 24 horas</li>
+                    <li>Ambiente familiar y seguro</li>
+                    <li>Servicios de lavandería</li>
+                    <li>Recepción siempre disponible</li>
+                    <li>Turismo sostenible certificado</li>
+                </ul>
+            </div>
+            <div class="about-visual fade-in">
+                🏨
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="ubicacion">
+        <div class="location-content">
+            <div class="location-info fade-in">
+                <h2>Ubicación Privilegiada</h2>
+                <p>Estamos estratégicamente ubicados cerca del Terminal de Garzón - Huila, lo que nos convierte en la opción perfecta para viajeros que buscan comodidad y fácil acceso al transporte.</p>
+                
+                <div class="location-features">
+                    <div class="location-feature">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🚌</div>
+                        <h4>Cerca del Terminal</h4>
+                        <p>A solo minutos del terminal de transporte</p>
+                    </div>
+                    <div class="location-feature">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+                        <h4>Fácil Acceso</h4>
+                        <p>Llegada y salida sin complicaciones</p>
+                    </div>
+                    <div class="location-feature">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🏪</div>
+                        <h4>Zona Comercial</h4>
+                        <p>Cerca de tiendas y servicios</p>
+                    </div>
+                    <div class="location-feature">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🛡️</div>
+                        <h4>Zona Segura</h4>
+                        <p>Ubicación segura y bien vigilada</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-placeholder fade-in">
+                📍 Garzón, Huila
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="contact-container">
+            <h2 class="section-title fade-in">Contáctanos</h2>
+            
+            <div class="contact-form fade-in">
+                <form id="reservationForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" placeholder="300 123 4567" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkin">Fecha de Llegada</label>
+                        <input type="date" id="checkin" name="checkin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkout">Fecha de Salida</label>
+                        <input type="date" id="checkout" name="checkout" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guests">Número de Huéspedes</label>
+                        <input type="number" id="guests" name="guests" min="1" max="6" placeholder="2" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje Adicional</label>
+                        <textarea id="message" name="message" rows="4" placeholder="¿Tienes alguna solicitud especial?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cta-button">Enviar Reserva</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <span class="contact-item-icon">📞</span>
+                    <h4>Teléfono</h4>
+                    <p>301 527 0088</p>
+                </div>
+                
+                <div class="contact-item fade-in">
+                    <span class="contact-item-icon">📧</span>
+                    <h4>Email</h4>
+                    <p>samarapedrazaurbina@gmail.com</p>
+                </div>
+                
+                <div class="contact-item fade-in">
+                    <span class="contact-item-icon">📍</span>
+                    <h4>Ubicación</h4>
+                    <p>Cerca del Terminal<br>Garzón, Huila</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#habitaciones">Habitaciones</a>
+                <a href="#ubicacion">Ubicación</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <p>&copy; 2025 Hotel Brisas Del Mar. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">Comprometidos con el turismo sostenible - Certificación NTS-TS 002</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Service Cards Hover Effect
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+
+        // Room Cards Click Effect
+        document.querySelectorAll('.room-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Create a ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(52, 211, 153, 0.4)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                const rect = card.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (rect.width / 2 - size / 2) + 'px';
+                ripple.style.top = (rect.height / 2 - size / 2) + 'px';
+                
+                card.style.position = 'relative';
+                card.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation keyframes
+        const rippleStyles = document.createElement('style');
+        rippleStyles.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyles);
+
+        // Form Submission with Animation
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Animate submit button
+            const submitBtn = this.querySelector('.cta-button');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+            submitBtn.style.transform = 'scale(0.95)';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                submitBtn.textContent = '¡Reserva Enviada! ✓';
+                submitBtn.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
+                submitBtn.style.transform = 'scale(1)';
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.innerHTML = `
+                    <div style="
+                        background: linear-gradient(45deg, rgba(16, 185, 129, 0.2), rgba(52, 211, 153, 0.2));
+                        border: 1px solid rgba(52, 211, 153, 0.5);
+                        color: #34d399;
+                        padding: 20px;
+                        border-radius: 15px;
+                        margin-top: 20px;
+                        text-align: center;
+                        animation: slideIn 0.5s ease-out;
+                    ">
+                        <strong>¡Gracias ${data.name}!</strong><br>
+                        Hemos recibido tu solicitud de reserva. Te contactaremos pronto al ${data.phone}.
+                    </div>
+                `;
+                this.appendChild(successMsg);
+                
+                // Reset form after 3 seconds
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = 'linear-gradient(45deg, #059669, #34d399)';
+                    successMsg.remove();
+                }, 3000);
+                
+            }, 1500);
+        });
+
+        // Add slide-in animation for success message
+        const slideInStyles = document.createElement('style');
+        slideInStyles.textContent = `
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(slideInStyles);
+
+        // Parallax Effect for Hero Section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Dynamic Icon Animation
+        const icons = document.querySelectorAll('.floating-icons .icon');
+        icons.forEach((icon, index) => {
+            icon.addEventListener('mouseenter', () => {
+                icon.style.transform = 'scale(1.5) rotate(360deg)';
+                icon.style.transition = 'all 0.5s ease';
+            });
+            
+            icon.addEventListener('mouseleave', () => {
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add random movement to floating icons
+        setInterval(() => {
+            icons.forEach(icon => {
+                const randomX = Math.random() * 20 - 10;
+                const randomY = Math.random() * 20 - 10;
+                icon.style.transform += ` translate(${randomX}px, ${randomY}px)`;
+                
+                setTimeout(() => {
+                    icon.style.transform = icon.style.transform.replace(/ translate\([^)]*\)/g, '');
+                }, 2000);
+            });
+        }, 5000);
+
+        // Interactive Elements
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const icon = item.querySelector('.contact-item-icon');
+                icon.style.animation = 'bounce 0.6s ease';
+                
+                setTimeout(() => {
+                    icon.style.animation = '';
+                }, 600);
+            });
+        });
+
+        // Add bounce animation
+        const bounceStyles = document.createElement('style');
+        bounceStyles.textContent = `
+            @keyframes bounce {
+                0%, 20%, 60%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-10px); }
+                80% { transform: translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(bounceStyles);
+
+        // Typing effect for hero subtitle
+        const heroSubtitle = document.querySelector('.hero p');
+        const originalText = heroSubtitle.textContent;
+        heroSubtitle.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < originalText.length) {
+                heroSubtitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        };
+        
+        setTimeout(typeWriter, 1500);
+
+        // Easter egg - Double click logo
+        let logoClickCount = 0;
+        document.querySelector('.logo').addEventListener('click', () => {
+            logoClickCount++;
+            if (logoClickCount === 3) {
+                // Create confetti effect
+                createConfetti();
+                logoClickCount = 0;
+            }
+        });
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = ['#4f9cf9', '#34d399', '#fbbf24'][Math.floor(Math.random() * 3)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.zIndex = '10001';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.borderRadius = '50%';
+                
+                document.body.appendChild(confetti);
+                
+                const fallAnimation = confetti.animate([
+                    { transform: 'translateY(-10px) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 3000 + Math.random() * 2000,
+                    easing: 'ease-out'
+                });
+                
+                fallAnimation.addEventListener('finish', () => {
+                    confetti.remove();
+                });
+            }
+        }
+
+        // Add current date to check-in field as default
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        document.getElementById('checkin').value = today.toISOString().split('T')[0];
+        document.getElementById('checkout').value = tomorrow.toISOString().split('T')[0];
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3');
+            e.target.value = value;
+        });
+
+        // Form validation with visual feedback
+        document.querySelectorAll('input[required], textarea[required]').forEach(input => {
+            input.addEventListener('blur', () => {
+                if (input.value.trim() === '') {
+                    input.style.borderColor = '#ef4444';
+                    input.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.3)';
+                } else {
+                    input.style.borderColor = 'rgba(52, 211, 153, 0.5)';
+                    input.style.boxShadow = '0 0 10px rgba(52, 211, 153, 0.3)';
+                }
+            });
+        });
+
+        console.log('🌊 Hotel Brisas Del Mar - Página cargada exitosamente!');
+        console.log('💡 Tip: Haz triple clic en el logo para una sorpresa!');
+    </script>
+</body>
+</html>
